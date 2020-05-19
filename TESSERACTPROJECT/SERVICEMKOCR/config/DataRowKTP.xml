@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DataKTP>
+  <provinsi>0</provinsi>
+  <kota>1</kota>
+  <nik>2</nik>
+  <nama>3</nama>
+  <ttl>4</ttl>
+  <jkel>5</jkel>
+  <alamat>6</alamat>
+  <rtrw>7</rtrw>
+  <keldesa>8</keldesa>
+  <kecamatan>9</kecamatan>
+  <agama>10</agama>
+  <statuskawin>11</statuskawin>
+  <pekerjaan>12</pekerjaan>
+  <kewarganegaraan>13</kewarganegaraan>
+  <berlaku>14</berlaku>
+<coba>15</coba>
+</DataKTP>
+
+

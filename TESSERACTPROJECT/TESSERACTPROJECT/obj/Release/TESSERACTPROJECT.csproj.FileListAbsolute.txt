@@ -1,0 +1,13 @@
+C:\Users\WIWIK\Documents\Visual Studio 2013\Projects\TESSERACTPROJECT\TESSERACTPROJECT\bin\x86\liblept1753.dll
+C:\Users\WIWIK\Documents\Visual Studio 2013\Projects\TESSERACTPROJECT\TESSERACTPROJECT\bin\x86\libtesseract3052.dll
+C:\Users\WIWIK\Documents\Visual Studio 2013\Projects\TESSERACTPROJECT\TESSERACTPROJECT\bin\x64\liblept1753.dll
+C:\Users\WIWIK\Documents\Visual Studio 2013\Projects\TESSERACTPROJECT\TESSERACTPROJECT\bin\x64\libtesseract3052.dll
+C:\Users\WIWIK\Documents\Visual Studio 2013\Projects\TESSERACTPROJECT\TESSERACTPROJECT\bin\TESSERACTPROJECT.dll.config
+C:\Users\WIWIK\Documents\Visual Studio 2013\Projects\TESSERACTPROJECT\TESSERACTPROJECT\bin\TESSERACTPROJECT.dll
+C:\Users\WIWIK\Documents\Visual Studio 2013\Projects\TESSERACTPROJECT\TESSERACTPROJECT\bin\TESSERACTPROJECT.pdb
+C:\Users\WIWIK\Documents\Visual Studio 2013\Projects\TESSERACTPROJECT\TESSERACTPROJECT\bin\Tesseract.dll
+C:\Users\WIWIK\Documents\Visual Studio 2013\Projects\TESSERACTPROJECT\TESSERACTPROJECT\obj\Release\TESSERACTPROJECT.dll
+C:\Users\WIWIK\Documents\Visual Studio 2013\Projects\TESSERACTPROJECT\TESSERACTPROJECT\obj\Release\TESSERACTPROJECT.pdb
+C:\Users\WIWIK\Documents\Visual Studio 2013\Projects\TESSERACTPROJECT\TESSERACTPROJECT\obj\Release\Interop.MODI.dll
+C:\Users\WIWIK\Documents\Visual Studio 2013\Projects\TESSERACTPROJECT\TESSERACTPROJECT\obj\Release\TESSERACTPROJECT.csproj.ResolveComReference.cache
+C:\Users\WIWIK\Documents\Visual Studio 2013\Projects\TESSERACTPROJECT\TESSERACTPROJECT\obj\Release\TESSERACTPROJECT.csprojResolveAssemblyReference.cache

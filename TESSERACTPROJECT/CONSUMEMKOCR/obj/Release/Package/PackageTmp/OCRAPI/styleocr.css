@@ -1,0 +1,14 @@
+﻿
+#wrapper{display:flex; flex-direction:column;}
+.header{ width:100%; background-color:rgb(0, 148, 255); color:white; padding:30px; margin-bottom:10px;}
+.box{display:flex; flex-direction:column; width:100vh; margin-left:10px; }
+.boxisi{display:flex; flex-direction:column; margin-right:90px;}
+
+.data1{margin:20px; padding:10px;}
+.isi{display:flex; flex-direction:row; width:80vh;}
+.xs{display:flex; flex-direction:row; width:80vh; padding:40px; }
+td{ width:100vh;}
+table{width:361px;
+}
+body {
+}

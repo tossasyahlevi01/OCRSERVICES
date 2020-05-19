@@ -1,0 +1,27 @@
+﻿
+.container{ display:flex; flex-direction:column;}
+#wrapper{ width:100vh; display:flex; flex-direction:row; height:100%;}
+
+.header { background-color:rgb(0, 148, 255); color:white; padding:10px;}
+.ass{display:flex; flex-direction:column; margin-left:10vh; margin:0 auto;}
+.bt {
+    width: 10vh;
+}
+.as{width:20vh;}
+.bts{ width:10vh; display:flex; flex-direction:row;}
+.title{ padding:30px; background-color:rgb(0, 148, 255); color:white;}
+.cara ul{ width:29vh;}
+.cara ul li{ width:49vh;}
+.ok1{float:left; width:10vh; display:flex; flex-direction:column;}
+.ok2{float:right; width:10vh; display:flex; flex-direction:column; margin-left:100vh;}
+
+textarea{height:500px;}
+
+.ims{display:flex; flex-direction:row; width:70vh;}
+
+.ims img{width:50%;}
+
+*{width:100vh; float:left; }
+
+body {
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DataIjazah>
+  <GelarDepan>0</GelarDepan>
+    <NamaLengkap>1</NamaLengkap>
+  <GelarBelakang>2</GelarBelakang>
+  <ttl>3</ttl>
+  <Universitas>4</Universitas>
+  <NomorIjazah>5</NomorIjazah>
+  <TanggalIjazah>6</TanggalIjazah>
+  <TahunTerbit>7</TahunTerbit>
+</DataIjazah>

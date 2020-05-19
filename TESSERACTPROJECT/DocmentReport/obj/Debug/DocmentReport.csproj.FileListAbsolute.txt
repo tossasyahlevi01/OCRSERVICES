@@ -1,0 +1,6 @@
+C:\Users\WIWIK\Documents\Visual Studio 2013\Projects\TESSERACTPROJECT\DocmentReport\bin\DocmentReport.dll.config
+C:\Users\WIWIK\Documents\Visual Studio 2013\Projects\TESSERACTPROJECT\DocmentReport\bin\DocmentReport.dll
+C:\Users\WIWIK\Documents\Visual Studio 2013\Projects\TESSERACTPROJECT\DocmentReport\bin\DocmentReport.pdb
+C:\Users\WIWIK\Documents\Visual Studio 2013\Projects\TESSERACTPROJECT\DocmentReport\obj\Debug\DocmentReport.csprojResolveAssemblyReference.cache
+C:\Users\WIWIK\Documents\Visual Studio 2013\Projects\TESSERACTPROJECT\DocmentReport\obj\Debug\DocmentReport.dll
+C:\Users\WIWIK\Documents\Visual Studio 2013\Projects\TESSERACTPROJECT\DocmentReport\obj\Debug\DocmentReport.pdb

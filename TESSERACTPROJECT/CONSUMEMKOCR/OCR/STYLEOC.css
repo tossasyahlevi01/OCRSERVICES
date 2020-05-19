@@ -1,0 +1,11 @@
+﻿
+*{margin:0 auto; padding:0;}
+
+.header{ width:100%; padding:10px; background-color:rgb(0, 148, 255); color:white;}
+.plx{
+}
+.atas{margin:20px; }
+.box{margin:0 auto; width:80%; display:flex; flex-direction:row; padding:10px; margin:10px;}
+
+body {
+}
