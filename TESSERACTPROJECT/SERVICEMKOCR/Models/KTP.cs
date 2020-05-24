@@ -77,6 +77,7 @@ namespace SERVICEMKOCR.Models
 
         public string error { get; set; }
         OCRService ocrs = new OCRService();
+      
         RowKTP KTPRow = new RowKTP();
 
         public string hasilteks(string text)
@@ -89,26 +90,55 @@ namespace SERVICEMKOCR.Models
         {
             return Regex.Replace(str, "[^a-zA-Z0-9_.]+", "", RegexOptions.Compiled);
         }
-        public IEnumerable<string> WordingProcess(string text)
+        public List<KTP>  WordingProcess(string text)
         {
-           // string hasil = RemoveSpecialCharacters(text);
-            string resultString = Regex.Replace(text, @"^\s+$[\r\n]*", string.Empty, RegexOptions.Multiline);
-            string a = resultString.Replace("senis Kelamn — ", "").Replace("denisKelamin ", "").Replace("Name", "").Replace("KellDesa", "").Replace("Gol Darah", "").Replace("Gol Darah ", "").Replace("& ne Kelaman", "").Replace("Mama", "").Replace("ATAW", "").Replace("Status Perkawmnan", "").Replace("ampatTgi Lahu", "").Replace("TempatrTgi Lahir", "").Replace("RTRW", "").Replace("Name", "").Replace("'erkawinan", "").Replace("Jenis kelamin", "").Replace("RTIW", "").Replace("TempatTgi Lahir", "").Replace("Gol Darah", "").Replace("RTRW", "").Replace("GoiDarah O", "").Replace("Kelesa — ", "").Replace("Status Perkawinar", "").Replace("gol.darah", "").Replace("Alamat", "").Replace("Berlaku Hingga", "").Replace("Jenis Kelamin", "").Replace("TempauTgi Lahir", "").Replace("RTAW", "").Replace("Gol Darah", "").Replace("RTRW", "").Replace("RTRW ", "").Replace("Kewarganegaraan", "").Replace("KeVDesa", "").Replace("RTRW", "").Replace("Gol Darah ", "").Replace("/", "").Replace("Jjene kelamin", "").Replace("Tempai TgiLahu", "").Replace("NIK", "").Replace("Nama", "").Replace("Agama", "").Replace("Pekerjaan", "").Replace("Status Perkawinan", "").Replace("KelDesa", "").Replace("Kecamatan", "").Replace("StatusPerkawinan.", "").Replace(":", "").Replace(".", "").Replace("RT/RW", "").Replace("TempaiTgiLahu-", "").Replace("Jjenekelamin", "").Replace("Gol.Darah", "").Replace("Almat", "").Replace("?", "").Replace("TempaiTgiLahu", "").Replace("MPIalLahu", "").Replace("0rKelamun", "").Replace("Alnal", "").Replace("HIRW", "").Replace("KetDesa", "").Replace("StatusPerkawinan", "").Replace("BerlakuHingga", "").Replace("GolDaran", "").Replace("TemparIgllahu—", "").Replace("seniskelamin", "").Replace("Alnat", "").Replace("TempatTgiLahi", "").Replace("Jeriskelamin", "");
-            string[] sep = new string[] { "\n" };
-            string[] lines = a.Split(sep, StringSplitOptions.RemoveEmptyEntries);
-            String[] sEmails = new String[lines.Count()];
-            for (int ix = 0; ix < lines.Count(); ix++)
-            {if(lines[ix]==null || lines[ix]=="")
+            try
             {
-                sEmails[ix] = lines[ix].Replace(Environment.NewLine + Environment.NewLine, Environment.NewLine);
-            }
-            else
-            {
-                sEmails[ix] = lines[ix].Trim('\r', '\n');
-            }
+                // string hasil = RemoveSpecialCharacters(text);
+                string resultString = Regex.Replace(text, @"^\s+$!”[\r\n]*", string.Empty, RegexOptions.Multiline);
+                string a = resultString.Replace("GolDarah-", "").Replace(" ", string.Empty).Replace("/n", string.Empty).Replace("TempatTgi Lahir “", "").Replace("Gol Darah", "").Replace("wnmsnusu", "").Replace("TempatTgi Lahir", "").Replace("—", "").Replace("(M", "").Replace("Jeniskelamin", "").Replace("TempatrTgi Lahir", "").Replace("RTRW", "").Replace("KevDesa", "").Replace("senis Kelamn — ", "").Replace("denisKelamin ", "").Replace("Name", "").Replace("KellDesa", "").Replace("Gol Darah", "").Replace("Gol Darah ", "").Replace("& ne Kelaman", "").Replace("Mama", "").Replace("ATAW", "").Replace("Status Perkawmnan", "").Replace("ampatTgi Lahu", "").Replace("TempatrTgi Lahir", "").Replace("RTRW", "").Replace("Name", "").Replace("'erkawinan", "").Replace("Jenis kelamin", "").Replace("RTIW", "").Replace("TempatTgi Lahir", "").Replace("Gol Darah", "").Replace("RTRW", "").Replace("GoiDarah O", "").Replace("Kelesa — ", "").Replace("Status Perkawinar", "").Replace("gol.darah", "").Replace("Alamat", "").Replace("Berlaku Hingga", "").Replace("Jenis Kelamin", "").Replace("TempauTgi Lahir", "").Replace("RTAW", "").Replace("Gol Darah", "").Replace("RTRW", "").Replace("RTRW ", "").Replace("Kewarganegaraan", "").Replace("KeVDesa", "").Replace("RTRW", "").Replace("Gol Darah ", "").Replace("/", "").Replace("Jjene kelamin", "").Replace("Tempai TgiLahu", "").Replace("NIK", "").Replace("Nama", "").Replace("Agama", "").Replace("Pekerjaan", "").Replace("Status Perkawinan", "").Replace("KelDesa", "").Replace("Kecamatan", "").Replace("StatusPerkawinan.", "").Replace(":", "").Replace(".", "").Replace("RT/RW", "").Replace("TempaiTgiLahu-", "").Replace("Jjenekelamin", "").Replace("Gol.Darah", "").Replace("Almat", "").Replace("?", "").Replace("TempaiTgiLahu", "").Replace("MPIalLahu", "").Replace("0rKelamun", "").Replace("Alnal", "").Replace("HIRW", "").Replace("KetDesa", "").Replace("StatusPerkawinan", "").Replace("BerlakuHingga", "").Replace("GolDaran", "").Replace("TemparIgllahu—", "").Replace("seniskelamin", "").Replace("Alnat", "").Replace("TempatTgiLahi", "").Replace("Jeriskelamin", "");
+                string[] sep = new string[] { "\n" };
+                string[] lines = a.Split(sep, StringSplitOptions.RemoveEmptyEntries);
+                String[] sEmails = new String[lines.Count()];
+               // KTP data = new KTP();
+                List<KTP> daa2 = new List<KTP>();
+                String[] sx = new String[daa2.Count()];
+
+                for (int ix = 0; ix < lines.Count(); ix++)
+                {
+                    KTP data = new KTP();
+                    data.provinsi = lines[ix].Trim();
+                    data.kota = lines[ix].Trim();
+                    data.nik = lines[ix].Trim();
+                    data.nama = lines[ix];
+                    data.ttl = lines[ix];
+                    data.jkel = lines[ix];
+                    data.alamat = lines[ix];
+                    data.rtrw = lines[ix];
+                    data.keldesa = lines[ix];
+                    data.kecamatan = lines[ix];
+                    data.agama = lines[ix];
+                    data.pekerjaan = lines[ix];
+                    data.kewarganegaraan = lines[ix];
+                    data.berlaku = lines[ix];
+                    daa2.Add(data);
+                }
               
 
-                yield return sEmails[ix];
+               
+
+
+                // yield return sEmails[ix];
+
+                return daa2;
+            }
+            catch (Exception ex)
+            {
+                KTP k = new KTP();
+                k.error = ex.Message;
+                List<KTP> daa2 = new List<KTP>();
+                daa2.Add(k);
+                return daa2;
             }
         }
 
@@ -116,7 +146,7 @@ namespace SERVICEMKOCR.Models
         public IEnumerable<string> WordingProcess2(string text)
         {
             string resultString = Regex.Replace(text, @"^\s+$[\r\n]*", string.Empty, RegexOptions.Multiline).Trim();
-            string a = resultString.Replace("senis Kelamn — ", "").Replace("denisKelamin ", "").Replace("Name", "").Replace("KellDesa", "").Replace("Gol Darah", "").Replace("Gol Darah ", "").Replace("& ne Kelaman", "").Replace("Mama", "").Replace("ATAW", "").Replace("Status Perkawmnan", "").Replace("ampatTgi Lahu", "").Replace("TempatrTgi Lahir", "").Replace("RTRW", "").Replace("Name", "").Replace("'erkawinan", "").Replace("Jenis kelamin", "").Replace("RTIW", "").Replace("TempatTgi Lahir", "").Replace("Gol Darah", "").Replace("RTRW", "").Replace("GoiDarah O", "").Replace("Kelesa — ", "").Replace("Status Perkawinar", "").Replace("gol.darah", "").Replace("Alamat", "").Replace("Berlaku Hingga", "").Replace("Jenis Kelamin", "").Replace("TempauTgi Lahir", "").Replace("RTAW", "").Replace("Gol Darah", "").Replace("RTRW", "").Replace("RTRW ", "").Replace("Kewarganegaraan", "").Replace("KeVDesa", "").Replace("RTRW", "").Replace("Gol Darah ", "").Replace("/", "").Replace("Jjene kelamin", "").Replace("Tempai TgiLahu", "").Replace("NIK", "").Replace("Nama", "").Replace("Agama", "").Replace("Pekerjaan", "").Replace("Status Perkawinan", "").Replace("KelDesa", "").Replace("Kecamatan", "").Replace("StatusPerkawinan.", "").Replace(":", "").Replace(".", "").Replace("RT/RW", "").Replace("TempaiTgiLahu-", "").Replace("Jjenekelamin", "").Replace("Gol.Darah", "").Replace("Almat", "").Replace("?", "").Replace("TempaiTgiLahu", "").Replace("MPIalLahu", "").Replace("0rKelamun", "").Replace("Alnal", "").Replace("HIRW", "").Replace("KetDesa", "").Replace("StatusPerkawinan", "").Replace("BerlakuHingga", "").Replace("GolDaran", "").Replace("TemparIgllahu—", "").Replace("seniskelamin", "").Replace("Alnat", "").Replace("TempatTgiLahi", "").Replace("Jeriskelamin", "");
+            string a = resultString.Replace("TempatTgi Lahir “","").Replace("Gol Darah","").Replace("wnmsnusu","").Replace("TempatTgi Lahir","").Replace("—","").Replace("(M","").Replace("Jeniskelamin","").Replace("TempatrTgi Lahir","").Replace("RTRW","").Replace("KevDesa","").Replace("senis Kelamn — ", "").Replace("denisKelamin ", "").Replace("Name", "").Replace("KellDesa", "").Replace("Gol Darah", "").Replace("Gol Darah ", "").Replace("& ne Kelaman", "").Replace("Mama", "").Replace("ATAW", "").Replace("Status Perkawmnan", "").Replace("ampatTgi Lahu", "").Replace("TempatrTgi Lahir", "").Replace("RTRW", "").Replace("Name", "").Replace("'erkawinan", "").Replace("Jenis kelamin", "").Replace("RTIW", "").Replace("TempatTgi Lahir", "").Replace("Gol Darah", "").Replace("RTRW", "").Replace("GoiDarah O", "").Replace("Kelesa — ", "").Replace("Status Perkawinar", "").Replace("gol.darah", "").Replace("Alamat", "").Replace("Berlaku Hingga", "").Replace("Jenis Kelamin", "").Replace("TempauTgi Lahir", "").Replace("RTAW", "").Replace("Gol Darah", "").Replace("RTRW", "").Replace("RTRW ", "").Replace("Kewarganegaraan", "").Replace("KeVDesa", "").Replace("RTRW", "").Replace("Gol Darah ", "").Replace("/", "").Replace("Jjene kelamin", "").Replace("Tempai TgiLahu", "").Replace("NIK", "").Replace("Nama", "").Replace("Agama", "").Replace("Pekerjaan", "").Replace("Status Perkawinan", "").Replace("KelDesa", "").Replace("Kecamatan", "").Replace("StatusPerkawinan.", "").Replace(":", "").Replace(".", "").Replace("RT/RW", "").Replace("TempaiTgiLahu-", "").Replace("Jjenekelamin", "").Replace("Gol.Darah", "").Replace("Almat", "").Replace("?", "").Replace("TempaiTgiLahu", "").Replace("MPIalLahu", "").Replace("0rKelamun", "").Replace("Alnal", "").Replace("HIRW", "").Replace("KetDesa", "").Replace("StatusPerkawinan", "").Replace("BerlakuHingga", "").Replace("GolDaran", "").Replace("TemparIgllahu—", "").Replace("seniskelamin", "").Replace("Alnat", "").Replace("TempatTgiLahi", "").Replace("Jeriskelamin", "");
             string[] sep = new string[] { "\n" };
             string[] lines = a.Split(sep, StringSplitOptions.RemoveEmptyEntries);
             String[] sEmails = new String[lines.Count()];
@@ -127,6 +157,9 @@ namespace SERVICEMKOCR.Models
                 yield return sEmails[ix];
             }
         }
+
+
+       
         public static Bitmap cropAtRect(Bitmap b, Rectangle r)
         {
             Bitmap nb = new Bitmap(r.Width, r.Height);
@@ -294,6 +327,15 @@ namespace SERVICEMKOCR.Models
         }
         
             
+        public IEnumerable<string> hasil(string namafile, string jenis, int widts, int height)
+        {
+            
+               
+                IEnumerable<string> hasil = UploadKTPBackup(jenis, namafile, widts, height);
+                return hasil;
+          
+        }
+
         //Proses OCR KTP UPLOAD
         public KTP ProsesKTPUpload(string namafile, string jenis, int widts, int height)
         {
@@ -307,24 +349,30 @@ namespace SERVICEMKOCR.Models
                   //  IEnumerable<string> hasil = UploadKTP(jenis, namafile, widts, height);
                     IEnumerable<string> hasil = UploadKTPBackup(jenis, namafile, widts, height);
 
-                    var provinsi2 = hasil.Skip(s[0]).Take(1).FirstOrDefault();
-                    var kota2 = hasil.Skip(s[1]).Take(1).FirstOrDefault();
-                    var nik2 = hasil.Skip(s[2]).Take(1).FirstOrDefault();
-                    var nama2 = hasil.Skip(s[3]).Take(1).FirstOrDefault();
+                   
+                    var provinsi2 = hasil.Skip(s[0]).Take(1).FirstOrDefault().ToString();
+                    var kota2 = hasil.Skip(s[1]).Take(1).FirstOrDefault().ToString();
+                    var nik2 = hasil.Skip(s[2]).Take(1).FirstOrDefault().ToString();
+                 
+                      
+                    
+                 //   var nik2 = niks;
 
-                    var ttl2 = hasil.Skip(s[4]).Take(1).FirstOrDefault();
+                    var nama2 = hasil.Skip(s[3]).Take(1).FirstOrDefault().ToString();
 
-                    var jkel2 = hasil.Skip(s[5]).Take(1).FirstOrDefault();
-                    var alamat2 = hasil.Skip(s[6]).Take(1).FirstOrDefault();
+                    var ttl2 = hasil.Skip(s[4]).Take(1).FirstOrDefault().ToString();
 
-                    var rtrw2 = hasil.Skip(s[7]).Take(1).FirstOrDefault();
-                    var keldesa2 = hasil.Skip(s[8]).Take(1).FirstOrDefault();
-                    var kecamatan2 = hasil.Skip(s[9]).Take(1).FirstOrDefault();
-                    var agama2 = hasil.Skip(s[10]).Take(1).FirstOrDefault();
-                    var statuskawin2 = hasil.Skip(s[11]).Take(1).FirstOrDefault();
-                    var pekerjaan2 = hasil.Skip(s[12]).Take(1).FirstOrDefault();
-                    var kewarganegaraan2 = hasil.Skip(s[13]).Take(1).FirstOrDefault();
-                    var berlaku2 = hasil.Skip(s[14]).Take(1).FirstOrDefault();
+                    var jkel2 = hasil.Skip(s[5]).Take(1).FirstOrDefault().ToString();
+                    var alamat2 = hasil.Skip(s[6]).Take(1).FirstOrDefault().ToString();
+
+                    var rtrw2 = hasil.Skip(s[7]).Take(1).FirstOrDefault().ToString();
+                    var keldesa2 = hasil.Skip(s[8]).Take(1).FirstOrDefault().ToString();
+                    var kecamatan2 = hasil.Skip(s[9]).Take(1).FirstOrDefault().ToString();
+                    var agama2 = hasil.Skip(s[10]).Take(1).FirstOrDefault().ToString();
+                    var statuskawin2 = hasil.Skip(s[11]).Take(1).FirstOrDefault().ToString();
+                    var pekerjaan2 = hasil.Skip(s[12]).Take(1).FirstOrDefault().ToString();
+                    var kewarganegaraan2 = hasil.Skip(s[13]).Take(1).FirstOrDefault().ToString();
+                    var berlaku2 = hasil.Skip(s[14]).Take(1).FirstOrDefault().ToString();
                    KTP data = new KTP { provinsi = provinsi2, kota = kota2, nik = nik2, nama = nama2,  ttl = ttl2,   jkel = jkel2, alamat = alamat2, rtrw = rtrw2, keldesa = keldesa2, kecamatan = kecamatan2, agama = agama2, statuskawin = statuskawin2, pekerjaan = pekerjaan2, kewarganegaraan = kewarganegaraan2, berlaku = berlaku2};
 
                   //  KTP data = new KTP { line0 = provinsi2, line1 = kota2, line3 = nama2, line4 = ttl2, line5 = jkel2, line6 = alamat2, line7 = rtrw2, line8 = keldesa2, line9 = kecamatan2, line10 = agama2, line11 = statuskawin2, line12 = pekerjaan2, line13 = kewarganegaraan2, line14 = berlaku2 };
@@ -398,6 +446,8 @@ namespace SERVICEMKOCR.Models
         {
             string filename;
             Uri uri = new Uri(namafile);
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
              System.Net.WebRequest request =
         System.Net.WebRequest.Create(
         namafile);
@@ -408,7 +458,7 @@ namespace SERVICEMKOCR.Models
           
             string hasil = ocrs.process2(new Bitmap(bitmap2), widths, heights);
 
-            IEnumerable<string> hasil2 = WordingProcess(hasil);
+            IEnumerable<string> hasil2 = WordingProcess2(hasil);
             return hasil2;
            
 
@@ -427,7 +477,7 @@ namespace SERVICEMKOCR.Models
             //string hasil = ocrs.process2(new Bitmap(paths2));
             string hasil = ocrs.process2(new Bitmap(paths2), widths, heights);
 
-            IEnumerable<string> hasil2 = WordingProcess(hasil);
+            IEnumerable<string> hasil2 = WordingProcess2(hasil);
             return hasil2;
 
         }
@@ -478,12 +528,44 @@ namespace SERVICEMKOCR.Models
 
         }
 
-        public List<string> OCRService(string jenis, string namafile,int width, int height)
+
+        public IEnumerable<string> OCRService(string jenis, string namafile,int width, int height)
         {
-            var paths = System.Web.Hosting.HostingEnvironment.MapPath("~/IMAGES/" + namafile);
+            var paths = System.Web.Hosting.HostingEnvironment.MapPath("~/IMAGES2/" + namafile);
             string hasil = ocrs.process2(new Bitmap(paths), width, height);
-            IEnumerable<string> hasil2 = WordingProcess(hasil);
-            return hasil2.ToList();
+           IEnumerable<string> hasil2 = WordingProcess2(hasil);
+            return hasil2;
+
+        }
+
+
+        public IEnumerable<string> OCRUPLOADSERVICE(string jenis,string namafile,int width, int height)
+        {
+            string filename;
+            Uri uri = new Uri(namafile);
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            System.Net.WebRequest request =
+       System.Net.WebRequest.Create(
+       namafile);
+            System.Net.WebResponse response = request.GetResponse();
+            System.IO.Stream responseStream =
+                response.GetResponseStream();
+            Bitmap bitmap2 = new Bitmap(responseStream);
+
+            string hasil = ocrs.process2(new Bitmap(bitmap2), width, height);
+
+            IEnumerable<string> hasil2 = WordingProcess2(hasil);
+            return hasil2;
+
+        }
+
+        public List<KTP> OCRService2(string jenis, string namafile, int width, int height)
+        {
+            var paths = System.Web.Hosting.HostingEnvironment.MapPath("~/IMAGES2/" + namafile);
+            string hasil = ocrs.process2(new Bitmap(paths), width, height);
+            List<KTP> hasil2 = WordingProcess(hasil);
+            return hasil2;
 
         }
 
@@ -513,14 +595,14 @@ namespace SERVICEMKOCR.Models
           //  List<List<string>> rowdata = PopulateObjectKTPConfig();
             var list = rowdata.ToList();
             int hitungrow = HitungRowKTPConfig();
-            List<string> hasil = OCRService(jenis, namafile, widts, height);
+           // List<string> hasil = OCRService(jenis, namafile, widts, height);
             String[] datar = new String[hitungrow];           
             KTP K = new KTP();
             List<string> data1 = new List<string>();
             for (int a = 0; a <hitungrow; a++)
             {
               //  daftar[a]=System.Linq.Enumerable.Skip(rowdata[a]).Take(1).SingleOrDefault();
-               datar[a] = hasil.Skip(list[a]).Take(1).SingleOrDefault();
+             //  datar[a] = hasil.Skip(list[a]).Take(1).SingleOrDefault();
                data1.Add(datar[a]);
                 
                 // datar[a] = hasil.ElementAt(4);
@@ -540,7 +622,7 @@ namespace SERVICEMKOCR.Models
         {
             var paths = System.Web.Hosting.HostingEnvironment.MapPath("~/IMAGES/" + namafile);
             string hasil = ocrs.process2(new Bitmap(paths), widts, height);
-            IEnumerable<string> hasil2 = WordingProcess(hasil);
+            IEnumerable<string> hasil2 = WordingProcess2(hasil);
             return hasil2;
         }
 
@@ -549,9 +631,12 @@ namespace SERVICEMKOCR.Models
         {
             var paths = System.Web.Hosting.HostingEnvironment.MapPath("~/IMAGES/" + namafile);
             string hasil = ocrs.NormalBackground(new Bitmap(paths));
-            IEnumerable<string> hasil2 = WordingProcess(hasil);
+            IEnumerable<string> hasil2 = WordingProcess2(hasil);
             return hasil2;
         }
+
+
+
 
         //ambilurl
         public IEnumerable<string> UploadKTPBackupGrey(string jenis, string namafile, int widths, int heights)
@@ -586,7 +671,7 @@ namespace SERVICEMKOCR.Models
             }
             var paths2 = System.Web.Hosting.HostingEnvironment.MapPath("~/IMAGES/" + System.IO.Path.GetFileName(uri.LocalPath));
             string hasil = ocrs.process2(new Bitmap(paths2), widts, height);
-            IEnumerable<string> hasil2 = WordingProcess(hasil);
+            IEnumerable<string> hasil2 = WordingProcess2(hasil);
             return hasil2;
 
         }

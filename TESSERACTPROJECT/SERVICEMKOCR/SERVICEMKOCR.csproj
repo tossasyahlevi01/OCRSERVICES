@@ -143,12 +143,17 @@
     <None Include="Properties\PublishProfiles\Default Settings %285%29.pubxml" />
     <None Include="Properties\PublishProfiles\Default Settings %286%29.pubxml" />
     <None Include="Properties\PublishProfiles\Default Settings %287%29.pubxml" />
+    <None Include="Properties\PublishProfiles\Default Settings %288%29.pubxml" />
+    <None Include="Properties\PublishProfiles\Default Settings %289%29.pubxml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\MKCIDENG.pubxml" />
+    <None Include="Properties\PublishProfiles\ocr.pubxml" />
     <None Include="Properties\PublishProfiles\ocrcoba - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\ocrcoba - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\ocrcoba - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\ocrcoba - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\ocrcoba2 - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\ocrcoba2 - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -171,6 +176,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Class No Use\" />
+    <Folder Include="IMAGES2\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

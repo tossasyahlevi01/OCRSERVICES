@@ -1,0 +1,8 @@
+wrapMode.SetWrapMode(WrapMode.TileFlipXY) prevents ghosting around the image borders -- naïve resizing will sample transparent pixels beyond the image boundaries, but by mirroring the image we can get a better sample (this setting is very noticeable)
+destImage.SetResolution maintains DPI regardless of physical size -- may increase quality when reducing image dimensions or when printing
+Compositing controls how pixels are blended with the background -- might not be needed since we're only drawing one thing.
+graphics.CompositingMode determines whether pixels from a source image overwrite or are combined with background pixels. SourceCopy specifies that when a color is rendered, it overwrites the background color.
+graphics.CompositingQuality determines the rendering quality level of layered images.
+graphics.InterpolationMode determines how intermediate values between two endpoints are calculated
+graphics.SmoothingMode specifies whether lines, curves, and the edges of filled areas use smoothing (also called antialiasing) -- probably only works on vectors
+graphics.PixelOffsetMode affects rendering quality when drawing the new image

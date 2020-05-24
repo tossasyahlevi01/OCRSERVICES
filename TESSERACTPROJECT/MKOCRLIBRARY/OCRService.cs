@@ -89,21 +89,21 @@ namespace TesseractLibrary
         public int contrast()
         {
             XmlDocument doc = new XmlDocument();
-        var config = System.Web.Hosting.HostingEnvironment.MapPath("~/config");
-        doc.Load(config + "\\" + "config.xml");
-       XmlNode node = doc.DocumentElement.SelectSingleNode("/configurasi/contrast");
-       int a = Convert.ToInt32(node.InnerText);
+            var config = System.Web.Hosting.HostingEnvironment.MapPath("~/config");
+            doc.Load(config + "\\" + "config.xml");
+            XmlNode node = doc.DocumentElement.SelectSingleNode("/configurasi/contrast");
+            int a = Convert.ToInt32(node.InnerText);
             return a;
         }
 
-        public  int brightness()
+        public int brightness()
         {
             XmlDocument doc = new XmlDocument();
             var config = System.Web.Hosting.HostingEnvironment.MapPath("~/config");
             doc.Load(config + "\\" + "config.xml");
             XmlNode node = doc.DocumentElement.SelectSingleNode("/configurasi/brightness");
-            int b =  Convert.ToInt32(node.InnerText);
-           
+            int b = Convert.ToInt32(node.InnerText);
+
             return b;
 
         }
@@ -114,24 +114,24 @@ namespace TesseractLibrary
             var config = System.Web.Hosting.HostingEnvironment.MapPath("~/config");
             doc.Load(config + "\\" + "config.xml");
             XmlNode node = doc.DocumentElement.SelectSingleNode("/configurasi/bahasa");
-           string b = node.InnerText;
+            string b = node.InnerText;
             return b;
 
         }
 
-            public Bitmap setresolusi(Bitmap im, int width, int height)
+        public Bitmap setresolusi(Bitmap im, int width, int height)
         {
             System.Drawing.Bitmap b0 = new Bitmap(im);
             double scale = width / height;
             int x = (int)(b0.Width * scale);
-            int y= (int)(b0.Height * scale);
+            int y = (int)(b0.Height * scale);
             return b0;
         }
 
         public string NormalBackground(Bitmap p)
         {
-            var TessractData = System.Web.Hosting.HostingEnvironment.MapPath("~/tessdata");         
-           using (TesseractEngine processor = new TesseractEngine(TessractData, bahasa(), EngineMode.Default))
+            var TessractData = System.Web.Hosting.HostingEnvironment.MapPath("~/tessdata");
+            using (TesseractEngine processor = new TesseractEngine(TessractData, bahasa(), EngineMode.Default))
             {
                 using (Bitmap bmp = p)
                 {
@@ -172,7 +172,7 @@ namespace TesseractLibrary
 
         }
 
-        public static  System.Drawing.Image  Resize(System.Drawing.Image image, int newWidth, int maxHeight, bool onlyResizeIfWider)
+        public static System.Drawing.Image Resize(System.Drawing.Image image, int newWidth, int maxHeight, bool onlyResizeIfWider)
         {
             if (onlyResizeIfWider && image.Width <= newWidth) newWidth = image.Width;
 
@@ -198,6 +198,31 @@ namespace TesseractLibrary
             return res;
         }
 
+        public  Bitmap ResizeImage(Bitmap image, int width, int height)
+        {
+            var destRect = new Rectangle(0, 0, width, height);
+            var destImage = new Bitmap(width, height);
+
+            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+            using (var graphics = Graphics.FromImage(destImage))
+            {
+                graphics.CompositingMode = CompositingMode.SourceCopy;
+                graphics.CompositingQuality = CompositingQuality.HighQuality;
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.SmoothingMode = SmoothingMode.HighQuality;
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+                using (var wrapMode = new ImageAttributes())
+                {
+                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+                    graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
+                }
+            }
+            destImage.SetResolution(96.0F, 96.0F);
+            return destImage;
+        }
+
         public Bitmap DeskewImage(Bitmap bmp)
         {
             DocumentSkewChecker sc = new DocumentSkewChecker();
@@ -215,35 +240,84 @@ namespace TesseractLibrary
             return workmap1;
         }
 
+
         public string process2(Bitmap p, int widt, int height)
         {
             var TessractData = System.Web.Hosting.HostingEnvironment.MapPath("~/tessdata");
-            Bitmap desk = this.DeskewImage(p);
-           Bitmap p1 = this.setresolusi(desk, widt, height);
+             
+            //  Bitmap p1 = this.setresolusi(p, widt, height);
+           // Bitmap p2 = new Bitmap(p, new Size(680, 421));
+            Bitmap px = this.ResizeImage(new Bitmap(p), 680, 421);
+           // Bitmap desk = this.DeskewImage(px);
+           Bitmap process_2 = this.MakeGrayscale3(px);
+          // Bitmap bw = this.make_bw(process_2);
 
-          //  Bitmap p1 = this.setresolusi(new Bitmap(p),widt,height);
-            Bitmap process_2 = this.MakeGrayscale3(p1);
+         //   Bitmap process_3 = this.AdjustBrightnessContrast(desk, contrast(), brightness());
+            
+            //Bitmap p1 = this.setresolusi(process_2, widt, height);
+            // Bitmap bw = this.make_bw(process_2);
+            // p.MakeTransparent(Color.White);
 
-           // Bitmap bw = this.make_bw(process_2);
-       // p.MakeTransparent(Color.White);
-
-            Bitmap process_3 = this.AdjustBrightnessContrast(process_2, contrast() , brightness());
             //Bitmap process_3 = this.AdjustBrightnessContrast(new Bitmap(process_2), 300, 200);
 
             using (TesseractEngine processor = new TesseractEngine(TessractData, bahasa(), EngineMode.Default))
-            {            
-                using (Bitmap bmp = process_3)
+            {
+                using (Bitmap bmp = process_2)
                 {
                     using (var page = processor.Process(PixConverter.ToPix(bmp), PageSegMode.Auto))
                     {
+                        //processor.SetVariable("tessedit_char_whitelist", "!@#$%^&*()_+=-[]}{;:'\"\\|~`,./<>?");
+
+                        //processor.SetVariable("tessedit_char_whitelist", "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
+
                         string hasiltext = page.GetText();
 
-                       // processor.SetVariable("tessedit_char_whitelist", "0123456789,.$¢TempauTgi LahuATRW ——  —  Jaris kelamin  ");
                         return hasiltext;
                     }
                 }
             }
         }
 
-    }
-}
+                // public string  process2(Bitmap p, int widt, int height)
+                // {
+                //     var TessractData = System.Web.Hosting.HostingEnvironment.MapPath("~/tessdata");
+                //   //  Bitmap desk = this.DeskewImage(p);
+                // //  Bitmap p1 = this.setresolusi(p, widt, height);
+                //   Bitmap p2 = new Bitmap (p, new Size(680,421));
+
+                //     Bitmap process_2 = this.MakeGrayscale3(p2);
+                //     //Bitmap p1 = this.setresolusi(process_2, widt, height);
+                //    // Bitmap bw = this.make_bw(process_2);
+                //// p.MakeTransparent(Color.White);
+
+                //    // Bitmap process_3 = this.AdjustBrightnessContrast(process_2, contrast() , brightness());
+                //     //Bitmap process_3 = this.AdjustBrightnessContrast(new Bitmap(process_2), 300, 200);
+
+                //     using (TesseractEngine processor = new TesseractEngine(TessractData, bahasa(), EngineMode.Default))
+                //     {            
+                //         using (Bitmap bmp = process_2)
+                //         {
+                //             using (var page = processor.Process(PixConverter.ToPix(bmp), PageSegMode.Auto))
+                //             {
+                //                 //processor.SetVariable("tessedit_char_whitelist", "!@#$%^&*()_+=-[]}{;:'\"\\|~`,./<>?");
+
+                //                 //processor.SetVariable("tessedit_char_whitelist", "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
+
+
+
+
+                //                 string hasiltext = page.GetText();
+
+                //                     // processor.SetVariable("tessedit_char_whitelist", "0123456789,.$¢TempauTgi LahuATRW ——  —  Jaris kelamin  ");
+                //                     return hasiltext;
+                //                 }
+                //             }
+                //         }
+                //     }
+            }
+
+        }
+    
+
+
+

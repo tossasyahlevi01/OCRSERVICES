@@ -197,6 +197,33 @@ namespace TESSERACTPROJECT.ProcessPicture
             return bmp;
         }
 
+        public Bitmap converttobw(Bitmap px)
+        {
+            Bitmap bmp = new Bitmap(px);
+            int width = bmp.Width;
+            int height = bmp.Height;
+            int[] arr = new int[225];
+            int i = 0;
+            Color p;
+
+            //Grayscale
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    p = bmp.GetPixel(x, y);
+                    int a = p.A;
+                    int r = p.R;
+                    int g = p.G;
+                    int b = p.B;
+                    int avg = (r + g + b) / 3;
+                    avg = avg < 128 ? 0 : 255;     // Converting gray pixels to either pure black or pure white
+                    bmp.SetPixel(x, y, Color.FromArgb(a, avg, avg, avg));
+                }
+            }
+            return bmp;
+        }
+
         public Bitmap DeskewImage(Bitmap bmp)
         {
             DocumentSkewChecker sc = new DocumentSkewChecker();
@@ -217,7 +244,8 @@ namespace TESSERACTPROJECT.ProcessPicture
         public void process3(Bitmap p)
         {
           
-            Bitmap process_3 = this.changetowhite(p);
+           // Bitmap process_3 = this.changetowhite(p);
+            Bitmap process_3 = this.converttobw(p);
             MemoryStream ms = new MemoryStream();
             process_3.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
             var base64Data = Convert.ToBase64String(ms.ToArray());
@@ -229,11 +257,12 @@ namespace TESSERACTPROJECT.ProcessPicture
         {
            
             Bitmap process_2 = this.MakeGrayscale3(new Bitmap(p));
-
+            Grayscale filter = new Grayscale(0.2125, 0.7154, 0.0721);
+            Bitmap sx = filter.Apply(p);
 
             MemoryStream ms = new MemoryStream();
 
-            process_2.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+            sx.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
             var base64Data = Convert.ToBase64String(ms.ToArray());
             img1.Src = "data:image/Jpeg;base64," + base64Data;
 
@@ -373,6 +402,17 @@ namespace TESSERACTPROJECT.ProcessPicture
 
         }
 
+        public void deskewimages(Bitmap p)
+        {
+            Bitmap process_con = DeskewImage(new Bitmap(p));
+            MemoryStream ms = new MemoryStream();
+
+            process_con.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+            var base64Data = Convert.ToBase64String(ms.ToArray());
+            img4.Src = "data:image/Jpeg;base64," + base64Data;
+
+        }
+
        
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -387,17 +427,11 @@ namespace TESSERACTPROJECT.ProcessPicture
             imgori.ImageUrl = "~/IMAGESCONVERT/" + Path.GetFileName(upload.FileName);
 
             string ext = System.IO.Path.GetExtension(upload.FileName);
-            if (ext.ToLower() == ".jpg" || ext.ToLower() == ".jpeg")
-            {
+           
                 process2(new Bitmap(filepath));
 
               
-            }
-            else
-            {
-                Response.Write("<script>alert('File Extention Harus JPG || jpg || jpeg');</script>");
-
-            }
+          
         }
 
         protected void Button2_Click(object sender, EventArgs e)
@@ -412,17 +446,11 @@ namespace TESSERACTPROJECT.ProcessPicture
             imgori.ImageUrl = "~/IMAGESCONVERT/" + Path.GetFileName(upload.FileName);
 
             string ext = System.IO.Path.GetExtension(upload.FileName);
-            if (ext.ToLower() == ".jpg" || ext.ToLower() == ".jpeg")
-            {
+           
                 process3(new Bitmap(filepath));
 
 
-            }
-            else
-            {
-                Response.Write("<script>alert('File Extention Harus JPG || jpg || jpeg');</script>");
-
-            }
+         
         }
 
         protected void Button3_Click(object sender, EventArgs e)
@@ -437,17 +465,29 @@ namespace TESSERACTPROJECT.ProcessPicture
             imgori.ImageUrl = "~/IMAGESCONVERT/" + Path.GetFileName(upload.FileName);
 
             string ext = System.IO.Path.GetExtension(upload.FileName);
-            if (ext.ToLower() == ".jpg" || ext.ToLower() == ".jpeg")
-            {
-              // processcontrast(new Bitmap(filepath));
-                contas2(new Bitmap(filepath));
 
-            }
-            else
-            {
-                Response.Write("<script>alert('File Extention Harus JPG || jpg || jpeg');</script>");
+         
 
+            //AdjustBrightnessContrast(new Bitmap(filepath), 400, 100);
+
+            contas2(new Bitmap(filepath));
+        }
+
+        protected void Button4_Click(object sender, EventArgs e)
+        {
+            string folderpath = Server.MapPath("~/IMAGESCONVERT/");
+            if (!Directory.Exists(folderpath))
+            {
+                Directory.CreateDirectory(folderpath);
             }
+            upload.SaveAs(folderpath + Path.GetFileName(upload.FileName));
+            string filepath = folderpath + Path.GetFileName(upload.FileName);
+            imgori.ImageUrl = "~/IMAGESCONVERT/" + Path.GetFileName(upload.FileName);
+
+            string ext = System.IO.Path.GetExtension(upload.FileName);
+
+            
+            deskewimages(new Bitmap(filepath));
 
         }
 

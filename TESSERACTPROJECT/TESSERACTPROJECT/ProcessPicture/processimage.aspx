@@ -148,6 +148,28 @@
 
         </div>
             
+                 <div class="container">
+            <div class="form-group">
+                <div class="header">
+                    <h3> Deskew image</h3>
+                </div>
+            </div>
+            <div class="form-group ">
+                               <asp:Button OnClick="Button4_Click" runat="server" ID="Button4" Text="Process" CssClass="btn btn-light"  />
+
+                <div class="ass">
+              
+                <div class="ims">
+                      <img runat="server" id="img4" src="data:image/Jpeg;base64" alt="gambarprocess"/>
+                </div>
+                    </div>
+             
+            </div>
+           
+           
+
+
+        </div>
 
 
             </div>

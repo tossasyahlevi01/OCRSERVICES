@@ -95,46 +95,46 @@ namespace SERVICEMKOCR.Models
 
         }
 
-        //Proses OCR Ijazah UPLOAD
-        public Ijazah ProsesIjazahUpload(string namafile, string jenis)
-        {
-            if (jenis == "Ijazah")
-            {
-                try
-                {
-                    IEnumerable<int> rowdata = RowIjazah();
-                    var s = rowdata.ToList();
-                    String[] datar = new String[rowdata.Count()];
-                    IEnumerable<string> hasil = UploadIjazah(jenis, namafile);
-                    var GelarDepanData = hasil.Skip(s[0]).Take(1).FirstOrDefault();
-                    var NamaLengkapData = hasil.Skip(s[1]).Take(1).FirstOrDefault();
-                    var GelarBelakangData = hasil.Skip(s[2]).Take(1).FirstOrDefault();
-                    var ttlData = hasil.Skip(s[3]).Take(1).FirstOrDefault();
-                    var UniversitasData = hasil.Skip(s[4]).Take(1).FirstOrDefault();
-                    var NomorIjazahData = hasil.Skip(s[5]).Take(1).FirstOrDefault();
-                    var TanggalIjazahData = hasil.Skip(s[6]).Take(1).FirstOrDefault();
-                    var TahunTerbitIjazahData = hasil.Skip(s[7]).Take(1).FirstOrDefault();
+        ////Proses OCR Ijazah UPLOAD
+        //public Ijazah ProsesIjazahUpload(string namafile, string jenis)
+        //{
+        //    if (jenis == "Ijazah")
+        //    {
+        //        try
+        //        {
+        //            IEnumerable<int> rowdata = RowIjazah();
+        //            var s = rowdata.ToList();
+        //            String[] datar = new String[rowdata.Count()];
+        //            IEnumerable<string> hasil = UploadIjazah(jenis, namafile);
+        //            var GelarDepanData = hasil.Skip(s[0]).Take(1).FirstOrDefault();
+        //            var NamaLengkapData = hasil.Skip(s[1]).Take(1).FirstOrDefault();
+        //            var GelarBelakangData = hasil.Skip(s[2]).Take(1).FirstOrDefault();
+        //            var ttlData = hasil.Skip(s[3]).Take(1).FirstOrDefault();
+        //            var UniversitasData = hasil.Skip(s[4]).Take(1).FirstOrDefault();
+        //            var NomorIjazahData = hasil.Skip(s[5]).Take(1).FirstOrDefault();
+        //            var TanggalIjazahData = hasil.Skip(s[6]).Take(1).FirstOrDefault();
+        //            var TahunTerbitIjazahData = hasil.Skip(s[7]).Take(1).FirstOrDefault();
 
-                    Ijazah data = new Ijazah
-                    { 
-                        GelarDepan=GelarDepanData, NamaLengkap=NamaLengkapData,GelarBelakang=GelarBelakangData,
-                        ttl=ttlData, 
-                        universitas=UniversitasData, NomorIjazah=NomorIjazahData, TanggalIjazah=TanggalIjazahData, TahunTerbit=TahunTerbitIjazahData
-                    };
-                    return data;
-                }
-                catch (Exception ex)
-                {
-                    Ijazah data = new Ijazah { error = ex.Message };
-                    return data;
-                }
-            }
-            else
-            {
-                Ijazah ks = new Ijazah { error = "Fungsi Ini Hanya Untuk Ijazah" };
-                return ks;
-            }
-        }
+        //            Ijazah data = new Ijazah
+        //            { 
+        //                GelarDepan=GelarDepanData, NamaLengkap=NamaLengkapData,GelarBelakang=GelarBelakangData,
+        //                ttl=ttlData, 
+        //                universitas=UniversitasData, NomorIjazah=NomorIjazahData, TanggalIjazah=TanggalIjazahData, TahunTerbit=TahunTerbitIjazahData
+        //            };
+        //            return data;
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            Ijazah data = new Ijazah { error = ex.Message };
+        //            return data;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        Ijazah ks = new Ijazah { error = "Fungsi Ini Hanya Untuk Ijazah" };
+        //        return ks;
+        //    }
+        //}
 
         public string cekbackground(string namafile)
         {
@@ -190,21 +190,21 @@ namespace SERVICEMKOCR.Models
 }
 
 
-        public IEnumerable<string> UploadIjazah(string jenis, string namafile)
-        {
-            string filename;
-            var paths = System.Web.Hosting.HostingEnvironment.MapPath("~/IMAGES/");
-            Uri uri = new Uri(namafile);
-            using (WebClient client = new WebClient())
-            {
-                client.DownloadFile(new Uri(namafile), paths + System.IO.Path.GetFileName(uri.LocalPath));
-            }
-            var paths2 = System.Web.Hosting.HostingEnvironment.MapPath("~/IMAGES/" + System.IO.Path.GetFileName(uri.LocalPath));
-            string hasil = ocrs.process2(new Bitmap(paths2),4,5);
-            IEnumerable<string> hasil2 = WordingProcess(hasil);
-            return hasil2;
+        //public IEnumerable<string> UploadIjazah(string jenis, string namafile)
+        //{
+        //    string filename;
+        //    var paths = System.Web.Hosting.HostingEnvironment.MapPath("~/IMAGES/");
+        //    Uri uri = new Uri(namafile);
+        //    using (WebClient client = new WebClient())
+        //    {
+        //        client.DownloadFile(new Uri(namafile), paths + System.IO.Path.GetFileName(uri.LocalPath));
+        //    }
+        //    var paths2 = System.Web.Hosting.HostingEnvironment.MapPath("~/IMAGES/" + System.IO.Path.GetFileName(uri.LocalPath));
+        //    string hasil = ocrs.process2(new Bitmap(paths2),4,5);
+        //    IEnumerable<string> hasil2 = WordingProcess(hasil);
+        //    return hasil2;
 
-        }
+        //}
 
         //end
 
