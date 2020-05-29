@@ -96,6 +96,7 @@
     <Content Include="DataRowKTP.xml" />
     <Content Include="Global.asax" />
     <Content Include="IMAGES\1.jpg" />
+    <Content Include="IMAGES\DATA.txt" />
     <Content Include="Web.config" />
     <Content Include="X64\liblept1760.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
