@@ -8,17 +8,17 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using AForge.Imaging.Filters;
-using TesseractLibrary;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 using OCRWEBPROJECT.Models;
+using TesseractLibrary;
 namespace OCRWEBPROJECT.Page
 {
     public partial class Page : System.Web.UI.Page
     {
         Data d = new Data();
-        OCRService ocrs = new OCRService();
+        EkstraksiText ocrs = new EkstraksiText();
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -126,29 +126,7 @@ namespace OCRWEBPROJECT.Page
           //       }
 
 
-      private Bitmap DeCaptcha(Bitmap img)
-      {
-          Bitmap bmp = new Bitmap(img);
-          bmp = bmp.Clone(new Rectangle(0, 0, img.Width, img.Height), System.Drawing.Imaging.PixelFormat.Format24bppRgb);
-          Erosion erosion = new Erosion();
-          Dilatation dilatation = new Dilatation();
-          Invert inverter = new Invert();
-          ColorFiltering cor = new ColorFiltering();
-          cor.Blue = new AForge.IntRange(200, 255);
-          cor.Red = new AForge.IntRange(200, 255);
-          cor.Green = new AForge.IntRange(200, 255);
-          Opening open = new Opening();
-          BlobsFiltering bc = new BlobsFiltering() { MinHeight = 10 };
-          Closing close = new Closing();
-          GaussianSharpen gs = new GaussianSharpen();
-          ContrastCorrection cc = new ContrastCorrection();
-          FiltersSequence seq = new FiltersSequence(gs, inverter, open, inverter, bc, inverter, open, cc, cor, bc, inverter);
-          return seq.Apply(bmp);
-          
-          // pictureBox1.Image = seq.Apply(bmp);
-        //  return OCR((Bitmap)pictureBox1.Image);
-      }
-        
+     
         protected void btn_Click(object sender, EventArgs e)
         {
             //string urls = urlgambar();

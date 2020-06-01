@@ -24,7 +24,7 @@ namespace SERVICEMKOCR.Controllers
     public class OCRController : ApiController
     {
              // INTERFACE YANG DIPAKAI DATALOCAL DAN DATAUPLOAD
-        OCRService ocrs = new OCRService();
+             EkstraksiText ocrs = new EkstraksiText();
         KTP ModelKTP= new KTP();
         Ijazah ModelIjazah = new Ijazah();
                      

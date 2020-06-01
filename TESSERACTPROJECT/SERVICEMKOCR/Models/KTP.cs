@@ -56,27 +56,9 @@ namespace SERVICEMKOCR.Models
         public string kewarganegaraan { get; set; }
         public string berlaku { get; set; }
 
-        //public string lineprovinsi { get; set; }
-        //public string linekota { get; set; }
-        //public string linenik { get; set; }
-        //public string linenama { get; set; }
-        //public string linenamab { get; set; }
-        //public string linettl { get; set; }
-        //public string linettlb { get; set; }
-        //public string linejkel { get; set; }
-        //public string linealamat { get; set; }
-        //public string linealamatb { get; set; }
-        //public string linertrw { get; set; }
-        //public string linekeldesa { get; set; }
-        //public string linekecamatan { get; set; }
-        //public string lineagama { get; set; }
-        //public string linestatuskawin { get; set; }
-        //public string linepekerjaan { get; set; }
-        //public string linekewarganegaraan { get; set; }
-        //public string lineberlaku { get; set; }
-
+    
         public string error { get; set; }
-        OCRService ocrs = new OCRService();
+        EkstraksiText ocrs = new EkstraksiText();
       
         RowKTP KTPRow = new RowKTP();
 
@@ -160,34 +142,8 @@ namespace SERVICEMKOCR.Models
 
 
        
-        public static Bitmap cropAtRect(Bitmap b, Rectangle r)
-        {
-            Bitmap nb = new Bitmap(r.Width, r.Height);
-            Graphics g = Graphics.FromImage(nb);
-
-            g.DrawImage(b, -r.X, -r.Y);
-            return nb;
-
-        }
-
-        public Bitmap Crop(string img, int width, int height, int x, int y)
-        {
-
-            Image image = Image.FromFile(img);
-            Bitmap bmp = new Bitmap(width, height, PixelFormat.Format24bppRgb);
-            bmp.SetResolution(80, 60);
-            Graphics gfx = Graphics.FromImage(bmp);
-            gfx.SmoothingMode = SmoothingMode.AntiAlias;
-            gfx.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            gfx.PixelOffsetMode = PixelOffsetMode.HighQuality;
-            gfx.DrawImage(image, new Rectangle(0, 0, width, height), x, y, width, height, GraphicsUnit.Pixel);
-            image.Dispose();
-            bmp.Dispose();
-            gfx.Dispose();
-
-
-            return bmp;
-        }
+      
+    
 
         //Configurasi Posisi Line KTP
         public IEnumerable<int> PopulateObjectKTPConfig()

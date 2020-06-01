@@ -28,7 +28,7 @@ namespace SERVICEMKOCR.Models
         public string TanggalIjazah { get; set; }
         public string TahunTerbit { get; set; }
         public string error { get; set; }
-        OCRService ocrs = new OCRService();
+        EkstraksiText ocrs = new EkstraksiText();
         IjazahRow IjazahRows = new IjazahRow();
 
         public IEnumerable<string> WordingProcess(string text)

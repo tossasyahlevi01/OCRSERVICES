@@ -7,8 +7,8 @@
     <ProjectGuid>{75E98F1C-ADFD-4ECD-85B2-CA01EBBBA634}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TesseractLibrary</RootNamespace>
-    <AssemblyName>TesseractLibrary</AssemblyName>
+    <RootNamespace>MKOCRLIBRARY</RootNamespace>
+    <AssemblyName>MKOCRLIBRARY</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>ccedc36b</NuGetPackageImportStamp>
@@ -81,14 +81,16 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="netstandard" />
+    <Reference Include="netstandard">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Tesseract">
       <HintPath>..\packages\Tesseract-test.4.0.0-beta16\lib\netstandard2.0\Tesseract.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BitmapToPixConverter.cs" />
-    <Compile Include="OCRService.cs" />
+    <Compile Include="EkstraksiText.cs" />
     <Compile Include="PGM.cs" />
     <Compile Include="PixConverter.cs" />
     <Compile Include="PixToBitmapConverter.cs" />
